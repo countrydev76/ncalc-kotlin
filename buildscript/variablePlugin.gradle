@@ -1,0 +1,106 @@
+ext {
+  gGroupId = 'io.jopitel.kotlin.ncalc'
+  gVersion = '0.0.3'
+  gVersionCode = 19011620
+  gRepoUserOrg = 'countrydev76'
+  gRepoUserId = 'countrydev76'
+  gRepoUserPw = 'tkrkfxxxxxx'
+  gRepoUrl = "https://github.com/${gRepoUserOrg}/${rootProject.name}"
+}
+
+ext.VERSIONS = [
+    // plugin
+    gradlePlugin        : '3.2.1',
+    spotlessPlugin      : '3.16.0',
+    versionPlugin       : '0.20.0',
+    bintrayPlugin       : '0.9',
+
+    // kotlin
+    kotlin              : '1.3.11',
+    androidx            : '1.0.0',
+    assent              : '2.2.0',
+    coroutines          : '1.1.0',    // latest:1.3.11
+    dotsIndicator       : '1.0.0',
+
+    // package
+    // - document
+    dokka               : '0.9.17', // https://github.com/Kotlin/dokka
+    // - test
+    mockito             : '2.23.11',  // https://site.mockito.org/
+    assertj             : '3.10.0',
+    // - json
+    gson                : '2.8.5',    // https://github.com/google/gson
+    jackson             : '2.9.7',    // https://github.com/FasterXML/jackson
+    // - orb
+    jpa                 : '2018.5.0',
+    // - log
+    logback             : '1.2.3',    // 1.3.0-alpha4
+    slf4j               : '1.7.25',
+    // - rest
+    fuel                : '<latest-version>',
+    http4k              : '3.104.0',
+    okhttp3             : '3.12.1',   // http://square.github.io/okhttp/
+    rxjava              : '2+',
+    rxkotlin            : '2+',
+    rxandroid           : '2+',
+    //coroutines          : '0.24.0', // 0.25.0 -> min-sdk(26)
+    // - firebase
+    googleservice       : '4.0.2',
+    // - webframework
+    springboot          : '1.5.7.RELEASE',
+    javalin             : '2.5.0',
+    ktor                : '1.1.1',
+    // - message
+    grpc                : '1.17.1',
+]
+
+// "file://$rootProject.rootDir/.mavenRepository", 'file:///Users/magmajo/Documents/.mavenRepository'
+ext.ENV = [
+    maven : [
+        localRepoUrl    : "file://$rootProject.rootDir/.mavenRepository",
+        remoteRepoUrl   : 'https://repo.example.com/maven',
+    ],
+    ivy : [
+        localRepoUrl    : "file://$rootProject.rootDir/.ivyRepository",
+        remoteRepoUrl   : 'https://repo.example.com/ivy',
+    ]
+]
+
+task displayProjectInfo {
+  group 'my'
+  doLast {
+    println '---------------------------------'
+    println '- PROJECT'
+    println '---------------------------------'
+    println 'gGroupId       : ' + gGroupId
+    println 'gVersion       : ' + gVersion
+    println 'gVersionCode   : ' + gVersionCode
+    println 'gRepoUserId    : ' + gRepoUserId
+    println 'gRepoUserPw    : ' + gRepoUserPw
+    println 'gRepoUserOrg   : ' + gRepoUserOrg
+    println 'gRepoUrl       : ' + gRepoUrl
+    println 'projectName    : ' + rootProject.name
+    println 'rootDir        : ' + rootProject.rootDir
+    println 'buildDir       : ' + rootProject.buildDir
+    println 'rootProject    : ' + rootProject.rootProject
+    println 'java           : ' + System.getProperty("java.version")
+    println 'kotlin         : ' + VERSIONS.kotlin
+    println 'gradle_plugin  : ' + VERSIONS.gradlePlugin
+    println ''
+
+    println '---------------------------------'
+    println '- VERSIONS'
+    println '---------------------------------'
+    println VERSIONS.toString()
+    println ''
+
+    println '---------------------------------'
+    println '- ENV'
+    println '---------------------------------'
+    println '- maven'
+    println ENV.maven
+    println '- ivy'
+    println ENV.ivy
+    println ''
+  }
+}

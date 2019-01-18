@@ -1,0 +1,18 @@
+ext {
+  paramVersion = gVersion
+  paramMainClass = "${gGroupId}.nemail.hjCalcEmailMain"
+  //mBaseName = 'nCalcEmail'
+}
+
+apply from: "$rootProject.rootDir/buildscript/extModuleApp.gradle"
+
+dependencies {
+  // kotlin
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$VERSIONS.kotlin"
+  // test
+  testCompile "org.jetbrains.kotlin:kotlin-test:$VERSIONS.kotlin"
+  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$VERSIONS.kotlin"
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  // package
+  compile project(':ncalccore')
+}

@@ -1,0 +1,31 @@
+/**
+ * dokka documentation
+ *
+ * - [kotlin-doc](http://kotlinlang.org/docs/reference/kotlin-doc.html)
+ * - [kotlin-in-action KDoc](https://livebook.manning.com/#!/book/kotlin-in-action/appendix-b/2)
+ * - [dokka github](https://github.com/Kotlin/dokka)
+ */
+//sourceSets {
+//  main.java.srcDirs += 'src/main/kotlin'
+//}
+apply plugin: 'org.jetbrains.dokka'
+dokka {
+  group 'my'
+  outputFormat = 'html' // javadoc, markdown, gfm, html-as-java, jekyll
+  outputDirectory = "$rootProject.rootDir/docs/dokkadoc"
+  includes = ["$rootProject.rootDir/README.md"]
+  // sourceDirs = files('src/main/kotlin')
+  linkMapping {
+    dir = "src/main/kotlin"
+    url = paramSourceUrl
+    suffix = "#L"
+  }
+//  includeNonPublic = false
+//  skipEmptyPackages = true
+//  samples = ['samples/basic.kt', 'samples/advanced.kt']
+//  externalDocumentationLink {
+//    url = new URL("https://example.com/docs/")
+//    // packageListUrl = new URL("file:///home/user/localdocs/package-list")
+//  }
+}
+//javadoc.dependsOn dokka

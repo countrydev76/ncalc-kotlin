@@ -1,0 +1,41 @@
+/**
+ * https://jojoldu.tistory.com/275
+ * https://gist.github.com/aalmiray/3e0e70cba66effdb449a
+ * https://proandroiddev.com/unified-code-coverage-for-android-revisited-44789c9b722f
+ */
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+//jacocoTestReport {
+//  group 'my'
+//  description "Generate Jacoco coverage reports."
+//  reports {
+//    html.enabled = true
+//    xml.enabled = true
+//    csv.enabled = false
+//  }
+//}
+
+coveralls {
+  sourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs).files.absolutePath
+}
+
+task jacocoRootReport(type: JacocoReport) {
+  group 'my'
+  description "Generate Jacoco coverage reports...."
+
+  reports {
+    html.enabled = true
+    xml.enabled = true
+    csv.enabled = false
+  }
+  def coverageSourceDirs = [
+      'src/main/java',
+      'src/main/kotlin'
+  ]
+  dependsOn = subprojects.test
+  sourceDirectories = files(coverageSourceDirs)
+  sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+  classDirectories =  files(subprojects.sourceSets.main.output)
+  executionData = files(subprojects.jacocoTestReport.executionData)
+}

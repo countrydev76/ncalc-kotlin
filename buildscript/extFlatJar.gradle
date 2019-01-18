@@ -1,0 +1,27 @@
+/**
+ * http://progtrend.blogspot.com/2017/07/intellij-gradle-java-project-runnable.html
+ * https://www.baeldung.com/gradle-fat-jar
+ * https://docs.gradle.org/4.10/userguide/plugins.html#sec:plugins_block
+ */
+
+// jar achive with customising
+jar {
+  //baseName = mBaseName
+  manifest {
+    attributes 'Main-Class': paramMainClass
+  }
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+
+// jar achive
+task myFatJar(type: Jar) {
+  group 'my'
+  // baseName = mBaseName
+  manifest {
+    attributes 'Main-Class': paramMainClass
+  }
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}

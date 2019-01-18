@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="io.estorm.android.ncalc.ncalc-kotlin.main" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalc-kotlin.test" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalccore.main" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalccore.test" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcemail.main" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcemail.test" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcnative.main" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcnative.test" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcpush.main" target="1.8" />
+      <module name="io.estorm.android.ncalc.ncalcpush.test" target="1.8" />
+      <module name="io.jopitel.android.ncalcpush.main" target="1.8" />
+      <module name="io.jopitel.android.ncalcpush.test" target="1.8" />
+      <module name="io.jopitel.kotlin.ncalc.ProjectCalc.main" target="1.8" />
+      <module name="io.jopitel.kotlin.ncalc.ProjectCalc.test" target="1.8" />
+      <module name="io.jopitel.kotlin.ncalcpush.main" target="1.8" />
+      <module name="io.jopitel.kotlin.ncalcpush.test" target="1.8" />
+      <module name="ncalcnative.main" target="1.8" />
+      <module name="ncalcnative.test" target="1.8" />
+      <module name="ProjectCalc.main" target="1.8" />
+      <module name="ProjectCalc.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

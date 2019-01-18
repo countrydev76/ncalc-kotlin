@@ -1,0 +1,84 @@
+
+//plugins {
+//    id 'java'
+//    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+//}
+
+buildscript {
+  apply from: "${rootProject.rootDir}/buildscript/variablePlugin.gradle"
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + VERSIONS.kotlin
+    classpath 'org.jetbrains.dokka:dokka-gradle-plugin:' + VERSIONS.dokka
+
+    // TODO: Bintray - Add These Bintray and Maven Gradle Classpaths
+    classpath 'com.novoda:bintray-release:0.9'
+//    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+//    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+    // TODO: coveralls with jacoco
+    classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
+  }
+}
+
+allprojects {
+  repositories {
+    mavenCentral()
+    mavenLocal()
+    // jcenter()
+    // google()
+    maven { url ENV.maven.localRepoUrl }
+    maven { url ENV.maven.remoteRepoUrl }
+//    maven { url "https://repo.example.com/maven2" }
+//    maven { url "file://local/repo/" }
+//    ivy { url "https://repo.example.com/ivy" }
+  }
+}
+
+//subprojects {
+//  repositories {
+//  }
+//  dependencies {
+//  }
+//}
+
+//subprojects { subproject ->
+//  if (subproject.name.startsWith("hello")) {
+//    apply plugin: 'org.gradle.sample.hello'
+//  }
+//  if (subproject.name.startsWith("goodbye")) {
+//    apply plugin: 'org.gradle.sample.goodbye'
+//  }
+//}
+
+group = gGroupId
+version = gVersion
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+
+dependencies {
+  // kotlin
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$VERSIONS.kotlin"
+  // test
+  testCompile "org.jetbrains.kotlin:kotlin-test:$VERSIONS.kotlin"
+  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$VERSIONS.kotlin"
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  // project
+  implementation 'io.jopitel.kotlin.ncalc:ncalccore:0.0.3'
+  //implementation 'io.jopitel.kotlin.ncalc:ncalcpush:0.0.3'
+  //implementation 'io.jopitel.kotlin.ncalc:ncalcemail:0.0.3'
+  // package
+}

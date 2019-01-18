@@ -1,0 +1,31 @@
+group = gGroupId
+version = gVersion
+
+//plugins {
+//    id 'java'
+//    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+//}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+
+apply from: "${rootProject.rootDir}/buildscript/extModuleBase.gradle"
+
+/**
+ * flatJar
+ *  - 이 부분이 포함 되면 Kotlin Runtime 추가 되어 실행이 가능 하기 때문에 라이브러리는 빼 줘야 한다. (ex: java -jar xxxx.jar)
+ */
+ext {
+  paramMainClass = paramMainClass
+}
+apply from: "${rootProject.rootDir}/buildscript/extFlatJar.gradle"

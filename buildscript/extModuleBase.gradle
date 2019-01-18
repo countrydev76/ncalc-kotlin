@@ -1,0 +1,88 @@
+
+task displayModuleInfo {
+  group 'my'
+  doLast {
+    println '----------------------------------------------'
+    println "- displayModuleInfo"
+    println '----------------------------------------------'
+    println "paramMainClass             : $paramMainClass"
+    println ""
+    println "rootProject.group          : $rootProject.group"
+    println "rootProject.version        : $rootProject.version"
+    println "rootProject.name           : $rootProject.name"
+    println "rootProject.description    : $rootProject.description"
+    println "rootProject.rootDir        : $rootProject.rootDir"
+    println "rootProject.buildDir       : $rootProject.buildDir"
+    println ""
+    println "project.group              : $project.group"
+    println "project.version            : $project.version"
+    println "project.name               : $project.name"
+    println "project.description        : $project.description"
+    println "project.rootDir            : $project.rootDir"
+    println "project.buildDir           : $project.buildDir"
+    println '----------------------------------------------\n'
+  }
+}
+
+/**
+ * upload
+ */
+ext {
+  paramGroupId = gGroupId
+  paramVersion = gVersion
+  paramLocalRepoUrl = ENV.maven.localRepoUrl
+  paramRemoteRepoUrl = ENV.maven.removeRepoUrl
+}
+apply from: "${rootProject.rootDir}/buildscript/extUploadArchives.gradle"
+
+/**
+ * dokka
+ */
+ext {
+  paramSourceUrl = "${gRepoUrl}/tree/master/src/main/kotlin"
+}
+apply from: "${rootProject.rootDir}/buildscript/extDokka.gradle"
+
+/**
+ * bintrayUpload
+ *
+ * - Android 라이브러리 jCenter 배포하기
+ *   http://www.junil.kim/deploy-android-library-to-jcenter/
+ * - Publishing your Android, Kotlin or Java library to jCenter from Android Studio
+ *   https://android.jlelse.eu/publishing-your-android-kotlin-or-java-library-to-jcenter-from-android-studio-1b24977fe450
+ *
+ * - 6 easy steps to upload your Android library to Bintray/JCenter
+ *   https://medium.com/@anitaa_1990/6-easy-steps-to-upload-your-android-library-to-bintray-jcenter-59e6030c8890
+ *   https://github.com/novoda/bintray-release
+ *
+ * - Android Module을 Bintray(JCenter)에 배포하는 방법
+ *   https://thdev.tech/androiddev/2016/09/01/Android-Bintray(JCenter)-Publish/
+ *
+ * - Maven Repository(.m2/settings.xml setup)
+ *   https://www.jfrog.com/confluence/display/RTF/Maven+Repository
+ *
+ * - bintray-example
+ *   https://github.com/bintray/bintray-examples
+ *   https://github.com/bintray/bintray-examples/tree/master/gradle-bintray-plugin-examples
+ *
+ * $ gradle build bintrayUpload -PbintrayUser=countrydev76 -PbintrayKey=46b8f5530c07758faafd3d376b933ad63ac6c705 -PdryRun=false --info
+ */
+// apply from: '../buildscript/extBintrayUpload.gradle'
+apply plugin: 'com.novoda.bintray-release'
+publish {
+  userOrg = gRepoUserOrg
+  groupId = gGroupId
+  artifactId = project.name
+  publishVersion = gVersion
+  desc = '4 rules for andorid core'
+  website = gRepoUrl
+  issueTracker = "${gRepoUrl}/issues"
+  repository = "${gRepoUrl}.git"
+}
+
+/**
+ * coveralls
+ * - https://jojoldu.tistory.com/275
+ * - https://proandroiddev.com/unified-code-coverage-for-android-revisited-44789c9b722f
+ */
+apply from: "${rootProject.rootDir}/buildscript/extCoveralls.gradle"

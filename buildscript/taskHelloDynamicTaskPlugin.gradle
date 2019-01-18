@@ -1,0 +1,66 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+/**
+ * http://code.i-harness.com/ko-kr/q/13771e6
+ */
+
+/**
+ * 1. 값이 적 으면 작업 생성 기능
+ *   가능한 값이 적고 미리 알고있는 경우 각 값을 프로그래밍 방식으로 만들 수 있습니다.
+ *
+ *   - Using
+ *     $ ./gradlew myHelloMacosx
+ */
+void createTask(String platform) {
+  String taskName = "myHello" + platform
+  task (taskName) {
+    // Todo:
+    println platform
+  }
+}
+
+String[] platforms = ["Macosx", "Linux32", "Linux64"]
+for(String platform : platforms) {
+  createTask(platform)
+}
+
+/**
+ * 2. 표준 입력 해킹
+ *   편리한 해킹은 표준 입력을 통해 인수를 전달하고 태스크를 읽는 것입니다.
+ *
+ *   - Using
+ *     $ ./gradlew myTask <<<"arg1 arg2 arg\ in\ several\ parts"
+ */
+String[] splitIntoTokens(String commandLine) {
+  String regex = "(([\"']).*?\\2|(?:[^\\\\ ]+\\\\\\s+)+[^\\\\ ]+|\\S+)"
+  Matcher matcher = Pattern.compile(regex).matcher(commandLine)
+  ArrayList<String> result = new ArrayList<>()
+  while (matcher.find()) {
+    result.add(matcher.group())
+  }
+  return result.toArray()
+}
+
+task taskName, {
+  doFirst {
+    String typed = new Scanner(System.in).nextLine();
+    String[] parsed = splitIntoTokens(typed);
+    println ("Arguments received: " + parsed.join(" "))
+    // Todo:
+  }
+}
+
+/**
+ * 3. -P 매개 변수들
+ *   마지막 옵션은 -P 매개 변수를 Gradle에 전달하는 것입니다.
+ *
+ *   - Using
+ *     $ ./gradlew myTask -PmyArg=hello
+ */
+task myHelloDynamicTask3 {
+  doFirst {
+    println myArg
+  }
+}
+
+

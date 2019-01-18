@@ -1,0 +1,13 @@
+ext {
+  paramVersion = gVersion
+  paramMainClass = "${gGroupId}.ncore.hjCalcMain"
+//mBaseName = 'nCalcCore'
+}
+
+apply from: "$rootProject.rootDir/buildscript/extModule.gradle"
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$VERSIONS.kotlin"
+  testCompile "org.jetbrains.kotlin:kotlin-test:$VERSIONS.kotlin"
+  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$VERSIONS.kotlin"
+}

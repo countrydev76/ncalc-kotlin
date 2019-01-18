@@ -1,0 +1,6 @@
+rootProject.name = 'ncalc-kotlin'
+include 'ncalccore'
+// findProject(':nCalcCore')?.name = 'ncalccore'
+include 'ncalcpush'
+include 'ncalcemail'
+include 'ncalcnative'

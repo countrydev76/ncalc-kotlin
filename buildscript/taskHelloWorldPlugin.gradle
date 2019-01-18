@@ -1,0 +1,195 @@
+/**
+ * ### Gradle 학습 가이드
+ * - [Gradle Started](https://docs.gradle.org/current/userguide/getting_started.html)
+ * - [Gradle UserGuide](https://docs.gradle.org/current/userguide/userguide.html)
+ * - [Android build 종속성 설정 가이드 ](https://developer.android.com/studio/build/?hl=ko)
+ * - [Gradle 단계 별 학습 가이드](https://araikuma.tistory.com/460?category=782572)
+ * - [운영 자동화#1 — 빌드 자동화 by Gradle](https://medium.com/@goinhacker/%EC%9A%B4%EC%98%81-%EC%9E%90%EB%8F%99%ED%99%94-1-%EB%B9%8C%EB%93%9C-%EC%9E%90%EB%8F%99%ED%99%94-by-gradle-7630c0993d09)
+ * - [Gradle Task 파라미터 전달 가이드](http://code.i-harness.com/ko-kr/q/13771e6)
+ * - [안드로이드 스튜디오 플러그인 직접 만들어보기](https://academy.realm.io/kr/posts/android-studio-plugin-development/)
+ */
+
+/**
+ *  ### Task 가이드
+ *  > [link](https://araikuma.tistory.com/464?category=782572)
+ */
+
+/**
+ * Using : $ gradle myHello
+ */
+task myHello {
+  doLast {
+    println System.getProperty("java.version")
+  }
+}
+
+/**
+ * Using : $ gradle myHelloPrePost
+ */
+task myHelloPrePost {
+  def javaVer = System.getProperty("java.version")
+  doLast {
+    println "hello doLast. group: $group, javaVer: ${System.getProperty("java.version")}"
+  }
+  doFirst {
+    println "hello doFirst.. version: $version, javaVer: $javaVer"
+  }
+}
+
+/**
+ * 태스크는 수행할 때 필요한 값을 매개 변수로 전달할 수 있다
+ * ``` bash
+ * Using : $ gradle myHelloParam -Pmax=5
+ * ```
+ */
+task myHelloParam {
+  doLast {
+    def n = max.toInteger()
+    for(def i in 1..n) {
+      println "No," + i + " count."
+    }
+    println("--end.")
+  }
+}
+
+/**
+ * 테스크에서 다른 테스크를 호출해야 하는 경우도 있다
+ * ```bash
+ * Using : $ gradle myHelloCallTask
+ * ```
+ */
+task myHelloCallTask {
+  doFirst {
+    println "*** start:hello task ***"
+    tasks.myHello.execute()
+  }
+  doLast {
+    tasks.myHelloPrePost.execute()
+    println("*** end:hello task ***")
+  }
+}
+
+/**
+ * - 어떤 테스크를 수행할 때, 다른 작업 수행이 필수적인 경우도 있다. 이러한 경우에는 "dependsOn '라는 기능을 사용할 수 있다
+ * ```bash
+ * Using : $ gradle myHelloDepensOn
+ * ```
+ */
+task myHelloDepensOn(dependsOn : ['aaa', 'bbb']) {
+  doFirst {
+    println "*** start:hello task ***"
+  }
+  doLast {
+    println "*** end:hello task ***"
+  }
+}
+
+task aaa {
+  doLast {
+    println "<< This is A task! >>"
+  }
+}
+task bbb {
+  doLast {
+    println "<< I'm task B!! >>"
+  }
+}
+
+/**
+ * ### JavaExec 클래스 이용
+ * > [link](https://araikuma.tistory.com/465?category=782572)
+ *
+ * - 일단 main과 classpath 만 준비한다. 이 2개는 디폴트로 값이 설정되어 있지 않아서 생략할 수도 없다. 그 외의 것은 디폴트인 상태로도 문제가 없을 것이다.
+ * ```
+ * Using : $ gradle appRun
+ * ```
+ */
+/*
+task appRun(type: JavaExec) {
+  group 'io.xxxxx.android.nproject'
+  description 'exec App class.'
+  main 'app'
+  classpath
+  sourceSets.main.runtimeClasspath
+  doFirst {
+    println()
+    println('---------- Start ----------')
+    println()
+  }
+  doLast {
+    println()
+    println('----------- end -----------')
+    println()
+  }
+}
+*/
+
+/**
+ * ### 커멘드를 실행하는 Exec 이용
+ * > [link](https://araikuma.tistory.com/465?category=782572)
+ *
+ * -
+ */
+task myJavaExec(type:Exec) {
+  group 'myhello'
+  description 'print java version.'
+  workingDir '.'
+  commandLine './myJavaExec'
+  doFirst {
+    println()
+    println('***** Java Version *****')
+  }
+}
+
+
+/**
+ * ### DefaultsTask 상속 클래스
+ * > [link](https://araikuma.tistory.com/465?category=782572)
+ *
+ * ```bash
+ * Using : $ gradle count or $ gradle total
+ * ```
+ */
+class MyCalc extends DefaultTask {
+  private int num
+  private String op
+
+  void num(p1){
+    num = p1
+  }
+
+  void op(p1){
+    op = p1
+  }
+
+  @TaskAction void calc() {
+    switch(op) {
+      case 'total':
+        int total = 0
+        for(def i in 1..num) { total += i }
+        println "total: ${total}"
+        break
+      case 'count':
+        for(def i in 1..num) {
+          println "NO, ${i}"
+        }
+        break
+      default:
+        println('not found operator...')
+    }
+  }
+}
+
+task myDefaultClassCalcTotal(type:MyCalc) {
+  group 'myhello'
+  description 'Task for calculating total.'
+  num 5
+  op 'total'
+}
+
+task myDefaultClassCalcCount(type:MyCalc) {
+  group 'myhello'
+  description 'Task for count number.'
+  num 5
+  op 'count'
+}
