@@ -12,7 +12,6 @@
 요약 설명 ...
 
 ## 학습 가이드
----
  - [none]()
 
 ## 진행상황
@@ -26,14 +25,12 @@
 - [ ] 문서 작업하기
 
 ## 소개
----
 
 <img src="none"></img>
 
 > 링크 : [none]()
 
 ## 준비하기
----
 ### 1. aaaaa
 #### 1.1. xxxxxxxxxx
 xxxxxxxxxxxxxx.
@@ -47,7 +44,6 @@ xxxxxxxxxxxxxx.
 ```
 
 ## 시작하기
----
 ### 1. 설치하기
 
 #### 1.1. xxxxxxxxxx
@@ -93,15 +89,12 @@ xxxxxxxxxxxxxx.
 
 
 ## 개발팁
----
 ...
 
 ## 개발이슈
----
 ...
 
 ## 참고사이트
----
   - 메인
     - [none](http://about)
 
