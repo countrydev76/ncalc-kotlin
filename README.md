@@ -1,42 +1,66 @@
-# project.ncalc - nCalc 개발 가이드
+# nCalc 개발 가이드
 
 ```shell
- _____                    __ __
-|     |_.-----..---.-..--|  |__|.-----..-----.
-|       |  _  ||  _  ||  _  |  ||     ||  _  |     __      __      __
-|_______|_____||___._||_____|__||__|__||___  |    |__|    |__|    |__|
-                                       |_____|
+        ______         __              __            __   __ __        
+.-----.|      |.---.-.|  |.----.______|  |--..-----.|  |_|  |__|.-----.
+|     ||   ---||  _  ||  ||  __|______|    < |  _  ||   _|  |  ||     |
+|__|__||______||___._||__||____|      |__|__||_____||____|__|__||__|__|
 ```
+
+[TOC]
 
 요약 설명 ...
 
+## 학습 가이드
+---
+ - [none]()
+
+## 진행상황
+- [x] 개발환경 구축
+- [ ] 소스관리 구축
+- [ ] 프로젝트 만들기
+- [ ] Respository 만들기
+- [ ] 코드구현
+- [ ] 단위 테스트 하기
+- [ ] 디버깅 하기
+- [ ] 문서 작업하기
 
 ## 소개
---- 
+---
 
 <img src="none"></img>
 
 > 링크 : [none]()
 
-## 학습 가이드
- - [none]()
- 
-## 시작하기
+## 준비하기
+---
+### 1. aaaaa
+#### 1.1. xxxxxxxxxx
+xxxxxxxxxxxxxx.
+```cpp
+```
 
+### 2. bbbbb
+#### 2.1. xxxxxxxxxxx
+xxxxxxxxxxxxxx.
+```cpp
+```
+
+## 시작하기
+---
 ### 1. 설치하기
 
-#### 1.1. Get AssertJ Core assertions
-우리는 민주 주의에 역사적 사명에 띠고 이땅에 태어났다.
+#### 1.1. xxxxxxxxxx
+xxxxxxxxxxxxxx.
 ```cpp
 ```
 
 ### 2. 설정하기
 
-#### 2.1. Get AssertJ Core assertions
-우리는 민주 주의에 역사적 사명에 띠고 이땅에 태어났다.
+#### 2.1. xxxxxxxxxxx
+xxxxxxxxxxxxxx.
 ```cpp
 ```
-
 ## 프로젝트 개발
 
 ### 1. Repository 만들기
@@ -55,9 +79,11 @@
 > 링크 : [none]()
 
 ### 6. 문서 작업 하기
-> 링크 : Please see the [Dokka Gradle example project](https://github.com/JetBrains/kotlin-examples/tree/master/gradle/dokka-gradle-example) for an example.
+> 링크 : [none]()
 
-[상세내용 보기](snippetslab://snippet/DA32E99F-7C32-4446-BED5-39CDFDD9F44E/)
+- [Kotlin 문서화 가이드](http://kotlinlang.org/docs/reference/kotlin-doc.html)
+- [Kotlin in action - 문서화 가이드](https://livebook.manning.com/#!/book/kotlin-in-action/appendix-b/2)
+- [Dokka github 가이드](https://github.com/Kotlin/dokka)
 
 ### 7. Maven 등록 하기
 > 링크 : [none]()
@@ -67,12 +93,15 @@
 
 
 ## 개발팁
+---
 ...
 
 ## 개발이슈
+---
 ...
 
 ## 참고사이트
+---
   - 메인
     - [none](http://about)
 
